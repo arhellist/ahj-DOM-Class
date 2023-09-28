@@ -1,0 +1,59 @@
+* {
+  cursor: url("../cursor/cursor_1.cur"), default;
+}
+body {
+  color: #e71818;
+  background-color: #000000;
+  text-align: center;
+}
+
+.heading {
+  margin-bottom: 1%;
+  font-size: 4em;
+}
+
+.gamepad {
+  display: grid;
+  gap: 3px;
+  justify-content: center;
+}
+
+.sell {
+  border: 1px solid red;
+  height: 100px;
+}
+
+.activeSell {
+  background-image: url(../img/goblin.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.missSell {
+  background-image: url(../img/fak.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.bloodSell {
+  background-image: url(../img/blood.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.winSell {
+  background-image: url(../img/win.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.looseSell {
+  background-image: url(../img/loose.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
