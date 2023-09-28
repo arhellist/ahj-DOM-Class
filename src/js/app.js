@@ -41,28 +41,31 @@ class Rampage {
   }
   runGame() {
     // Запуск игры
-
     let getRandom = () => Math.floor(Math.random() * this.sell.length);
     let lastTarget = getRandom();
-    const appendActiveByIndex = (index) => this.sell[index].classList.add("activeSell");
-    const removeActiveByIndex = (index) => this.sell[index].classList.remove("activeSell");
+    const appendActiveByIndex = (index) =>
+      this.sell[index].classList.add("activeSell");
+    const removeActiveByIndex = (index) =>
+      this.sell[index].classList.remove("activeSell");
 
     const intervalHandler = () => {
       removeActiveByIndex(lastTarget);
       lastTarget = getRandom();
       appendActiveByIndex(lastTarget);
-      this.onEventListener(clickSell);
       this.timeout = setTimeout(intervalHandler, 1000);
     };
-
+    this.onEventListener(clickSell);
     this.timeout = setTimeout(intervalHandler, 1000);
     this.resetHit();
     this.resetMiss();
   }
   stopGame() {
+    //остановка игры
     clearTimeout(this.timeout);
+    this.offEventListener(clickSell);
   }
   addHit() {
+    // условия попадвний
     this.hit += 1;
     this.hitValue.textContent = this.hit;
     if (this.hit >= 10) {
@@ -79,6 +82,7 @@ class Rampage {
     }
   }
   addMiss() {
+    // условия промахов
     this.miss += 1;
     this.missValue.textContent = this.miss;
     if (this.miss >= 10) {
@@ -95,24 +99,29 @@ class Rampage {
     }
   }
   resetHit(hit) {
+    // сброс попаданий
     this.hit = 0;
     this.hitValue.textContent = this.hit;
   }
   resetMiss(miss) {
+    //сброс промахов
     this.miss = 0;
     this.missValue.textContent = this.miss;
   }
   onEventListener(func) {
-    this.gamepad.addEventListener("click", func.bind(event), { once: true });
+    // установка обработчика
+    this.gamepad.addEventListener("click", func);
+  }
+  offEventListener(func) {
+    // снятие обработчика
+    this.gamepad.removeEventListener("click", func);
   }
 }
 
-const rampage = new Rampage(sell, hitValue, missValue, gamepad, 4);
+const rampage = new Rampage(sell, hitValue, missValue, gamepad, 4); // 4- размерность игрового поля
 rampage.setGamePad(); // установка игрового поля
 
 function clickSell(event) {
-  console.log(event.target.closest(".activeSell"));
-  console.log(event.target);
   let targetCell = event.target;
   if (targetCell.closest(".activeSell") !== null) {
     console.log("GOOD!");
